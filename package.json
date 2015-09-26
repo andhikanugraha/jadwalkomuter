@@ -1,0 +1,23 @@
+{
+  "name": "jadwalkomuter",
+  "version": "0.1.0",
+  "description": "Generated static HTML timetables for the Jakarta commuter train network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andhikanugraha/jadwalkomuter.git"
+  },
+  "author": "Andhika Nugraha (andhika.nugraha@outlook.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andhikanugraha/jadwalkomuter/issues"
+  },
+  "homepage": "https://github.com/andhikanugraha/jadwalkomuter#readme",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "handlebars": "^4.0.3"
+  }
+}
