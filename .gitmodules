@@ -1,4 +1,4 @@
 [submodule "dist"]
 	path = dist
-	url = https://github.com/jadwalkomuter/jadwalkomuter.github.io
+	url = https://github.com/jadwalkomuter/jadwalkomuter.github.io.git
 	branch = master
