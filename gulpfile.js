@@ -15,7 +15,7 @@ var buildHTML = require('./lib/buildHTML');
 gulp.task('default', ['build']);
 
 gulp.task('fetch', ['fetch:json']);
-gulp.task('copy', ['copy:fonts']);
+gulp.task('copy', ['copy:fonts', 'copy:readme']);
 gulp.task('build', ['copy', 'build:css', 'build:html', 'build:js']);
 gulp.task('clean', () => {
   return del(['dist/**', 'dist', '!dist/.git']);
@@ -70,4 +70,9 @@ gulp.task('clean:js', () => {
 gulp.task('copy:fonts', () => {
   return gulp.src('src/fonts/*')
     .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('copy:readme', () => {
+  return gulp.src('README.md')
+    .pipe(gulp.dest('dist'));
 });
