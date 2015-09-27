@@ -9,35 +9,59 @@
 
     <title>{{ stationName }} | jadwalkomuter</title>
   </head>
-  <body>
-    <div class="container">
-      <nav class="navbar navbar-dark navbar-static-top bg-inverse">
+  <body data-station-key="{{stationKey}}">
+    <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
+      <div class="container">
         <a class="navbar-brand" href="/">jadwalkomuter</a>
-      </nav>
-
+      </div>
+    </nav>
+    <div class="container main">
       <div class="timetable-title">
-        <h1>{{ stationName }}</h1>
+        <h1 class="display-4">{{ stationName }}</h1>
       </div>
 
-      <table class="table" id="timetable">
-        <thead>
-          <tr>
-            <th>Waktu</th>
-            <th>Tujuan</th>
-          </tr>
-        </thead>
-        <tr>
-          <td colspan="2" id="show-previous">Tampilkan selengkapnya</td>
-        </tr>
-        <tbody id="upcoming">
-          {{#departures}}
-          <tr data-time="{{timeString}}" class="departure">
-            <td class="time">{{timeString}}</td>
-            <td class="dest">{{destination}}</td>
-          </tr>
-          {{/departures}}
-        </tbody>
-      </table>
+      <div class="row">
+        <aside class="col-md-4 col-sm-5 col-xs-12 station-toggle-container">
+          <div class="card" id="destination-selector">
+            <form>
+              <div class="card-header">
+                Pilih stasiun tujuan:
+              </div>
+              <ul class="list-group list-group-flush" id="destination-toggles">
+                {{#destinations}}
+                <li class="list-group-item checkbox">
+                  <label><input type="checkbox" data-destination="{{key}}"> {{name}}</label>
+                </li>
+                {{/destinations}}
+              </ul>
+            </form>
+          </div>
+        </aside>
+
+        <div class="col-md-8 col-sm-7 col-xs-12 ">
+          <table class="table" id="timetable">
+            <thead>
+              <tr>
+                <th class="time">Waktu</th>
+                <th class="dest">Tujuan</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="2" id="show-previous">Tampilkan selengkapnya</td>
+            </tr>
+            </tbody>
+            <tbody id="upcoming">
+              {{#departures}}
+              <tr data-time="{{timeString}}" data-destination="{{destinationKey}}" class="departure">
+                <td class="time">{{timeString}}</td>
+                <td class="dest">{{destination}}</td>
+              </tr>
+              {{/departures}}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <script src="../js/timetable.js"></script>
   </body>

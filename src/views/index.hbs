@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>jadwalkomuter</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">jadwalkomuter</a>
+      </div>
+    </nav>
+    <div class="container main">
+      <div class="card" id="station-picker">
+        <form>
+          <div class="card-header">
+            <input class="form-control" type="text" placeholder="Masukkan nama stasiun..." id="station-search" autocomplete="off">
+          </div>
+          <ul class="list-group list-group-flush" id="station-list">{{#stations}}<li class="list-group-item"><a href="{{path}}/">{{name}}</a></li>{{/stations}}</ul>
+        </form>
+      </div>
+    </div>
+
+    <script>var data = {{{json}}}</script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

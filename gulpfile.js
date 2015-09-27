@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var babelify = require('babelify');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var del = require('del');
@@ -13,8 +14,11 @@ var buildHTML = require('./buildHTML');
 
 gulp.task('sass', () => {
   return gulp.src('src/scss/*.scss')
-  	.pipe(sass({ outputStyle: 'compressed' }))
-  	.pipe(gulp.dest('dist/css'));
+    .pipe(sass({
+      outputStyle: 'nexted',
+      includePaths: ['node_modules']
+    }))
+    .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('fetch', () => {
@@ -25,38 +29,39 @@ gulp.task('html', () => {
   return buildHTML();
 });
 
-gulp.task('js', ['timetable'].map(fn => {
+gulp.task('js', ['timetable', 'index'].map(fn => {
   gulp.task(`js:${fn}`, () =>
-  	  browserify({
+      browserify({
         entries: `src/js/${fn}.js`,
         debug: true
       })
-  	  .bundle()
+      .transform(babelify)
+      .bundle()
       .pipe(source(`${fn}.js`))
       .pipe(buffer())
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest('dist/js/')));
   return `js:${fn}`;
 }));
 
 gulp.task('clean:css', () => {
-	return del(['dist/css']);
+  return del(['dist/css']);
 });
 
 gulp.task('clean:js', () => {
-	return del(['dist/js']);
+  return del(['dist/js']);
 });
 
 gulp.task('clean:html', () => {
-	return del(['dist/*/index.html']);
+  return del(['dist/*/index.html']);
 });
 
 gulp.task('clean:json', () => {
-	return del(['dist/*/index.json', 'dist/index.json']);
+  return del(['dist/*/index.json', 'dist/index.json']);
 });
 
-gulp.task('clean:stations', () => {
-	return del(['dist/*', '!dist/css', '!dist/js', '!dist/.git']);
+gulp.task('clean', () => {
+  return del(['dist/**', 'dist', '!dist/.git']);
 });
 
 gulp.task('serve', serve('dist'));

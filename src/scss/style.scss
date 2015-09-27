@@ -1,13 +1,20 @@
-$enable-flex: true;
-$font-family-base: Segoe UI;
+$font-family-base: "San Francisco",
+	Segoe UI,
+	-apple-system, ".SFNSDisplay-Regular",
+	"Helvetica Neue", Helvetica,
+	Arial, sans-serif;
 
 @import "bootstrap/bootstrap";
 
+@import "fontawesome/variables";
+@import "fontawesome/path";
+@import "fontawesome/mixins";
+
+.main {
+	padding-top: 50px;
+}
 .timetable-title {
 	margin: ($spacer * 2) 0;
-	h1 {
-		@extend .display-4;
-	}
 }
 #past {
 	color: $brand-warning;
@@ -23,4 +30,58 @@ $font-family-base: Segoe UI;
 }
 #show-previous:hover {
 	text-decoration: underline;
+}
+.time {
+	width: 20%;
+}
+.dest {
+	width: 80%;
+}
+#destination-toggles li {
+	cursor: pointer;
+	padding: 0;
+	label {
+		@extend .list-group-item;
+		margin: 0;
+		border: 0;
+	}
+}
+#destination-toggles input {
+	margin-right: $spacer * 0.8;
+	margin-left: .4em;
+}
+.station-toggle-container {
+	float: right;
+}
+#station-picker {
+	margin-top: $spacer * 2;
+}
+#station-list li {
+	cursor: pointer;
+	padding: 0;
+	a {
+		@extend .list-group-item;
+		margin: 0;
+		border: 0;
+		color: $brand-primary;
+	}
+}
+
+#destination-selector {
+	ul {
+		display: none;
+	}
+	.card-header:before {
+		@include fa-icon();
+		content: $fa-var-chevron-down;
+		margin-right: $spacer * 0.8;
+	}
+}
+#destination-selector.expanded {
+	ul {
+		display: block;
+	}
+	.card-header:before {
+		content: $fa-var-chevron-up;
+	}
 }
