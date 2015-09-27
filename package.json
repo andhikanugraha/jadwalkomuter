@@ -1,5 +1,6 @@
 {
   "name": "jadwalkomuter",
+  "private": true,
   "version": "0.1.0",
   "description": "Generated static HTML timetables for the Jakarta commuter train network",
   "main": "index.js",
@@ -15,26 +16,22 @@
   "bugs": {
     "url": "https://github.com/andhikanugraha/jadwalkomuter/issues"
   },
-  "homepage": "https://github.com/andhikanugraha/jadwalkomuter#readme",
-  "dependencies": {
-    "bootstrap-sass": "^3.3.5",
-    "cheerio": "^0.19.0",
-    "fs-promise": "^0.3.1",
-    "handlebars": "^4.0.3",
-    "jquery": "^2.1.4",
-    "js-yaml": "^3.4.2",
-    "lodash": "^3.10.1",
-    "mkpath": "^0.1.0",
-    "moment": "^2.10.6"
-  },
+  "homepage": "https://jadwalkomuter.github.io",
   "devDependencies": {
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
+    "cheerio": "^0.19.0",
     "del": "^2.0.2",
+    "fs-promise": "^0.3.1",
     "gulp": "^3.9.0",
     "gulp-sass": "^2.0.4",
     "gulp-serve": "^1.2.0",
     "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "handlebars": "^4.0.3",
+    "jquery": "^2.1.4",
+    "js-yaml": "^3.4.2",
+    "lodash": "^3.10.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
