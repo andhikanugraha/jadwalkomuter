@@ -27,7 +27,8 @@ $font-family-base: "San Francisco",
 	}
 }
 #past {
-	color: $brand-warning;
+	font-style: italic;
+	color: $gray-light;
 	display: none;
 }
 #maybe-delayed {
@@ -63,8 +64,9 @@ $font-family-base: "San Francisco",
 .station-toggle-container {
 	float: right;
 }
+
 #station-picker {
-	margin-top: $spacer * 2;
+	margin-top: $spacer;
 }
 #station-list li {
 	cursor: pointer;
@@ -96,5 +98,30 @@ $font-family-base: "San Francisco",
 	}
 	.card-header:before {
 		content: $fa-var-chevron-up;
+	}
+}
+
+body[data-station-key] a.navbar-brand:before {
+	@include fa-icon();
+	content: $fa-var-arrow-left;
+	margin-right: $spacer * 0.8;
+
+}
+
+a.navbar-brand {
+	font-weight: 200;
+	strong {
+		font-weight: 600;
+	}
+}
+#pitch {
+	text-align: center;
+	margin: ($spacer) 0;
+	font-weight: 200;
+}
+@include media-breakpoint-up(lg) {
+	#pitch {
+		font-size: $font-size-h2;
+		margin: ($spacer * 2) 0;
 	}
 }
