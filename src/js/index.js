@@ -27,7 +27,7 @@ $(function() {
       filteredStations = allStations;
     }
     else {
-      let pattern = new RegExp(`.*${query}.*`, 'i');
+      let pattern = new RegExp(`.*${query.trim()}.*`, 'i');
       filteredStations = allStations.filter(s => (pattern.exec(s.name) || pattern.exec(s.path) || pattern.exec(s.key)));
     }
     console.log(filteredStations);
@@ -42,7 +42,8 @@ $(function() {
   $('#station-search').on('keyup change', function(e) {
     processQuery(this.value);
   });
-  // $(window).load(function() {
-    processQuery($('#station-search').val())
-  // });
+
+  processQuery($('#station-search').val());
+
+  $('#station-search').focus();
 });
