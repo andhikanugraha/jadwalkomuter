@@ -22,12 +22,12 @@ function handleDelayWindow($) {
     }
     str += minutes;
 
-    str += ':';
+    // str += ':';
 
-    if (seconds < 10) {
-      str += '0';
-    }
-    str += seconds;
+    // if (seconds < 10) {
+    //   str += '0';
+    // }
+    // str += seconds;
 
     return str;
   }
@@ -42,18 +42,15 @@ function handleDelayWindow($) {
   // modify innerHTML of table for multiple tbodies
   let maybeDelayed = new Date();
   maybeDelayed.setTime(Date.now() - (30 * 60 * 1000));
-  let maybeDelayedTimeString = makeTimeString(maybeDelayed);  
-  console.log(maybeDelayedTimeString);
+  let maybeDelayedTimeString = makeTimeString(maybeDelayed);
 
   let rightNow = new Date();
   let rightNowTimeString = makeTimeString(rightNow);
-  console.log(rightNowTimeString);
 
   let table = $('#timetable');
 
   let html = table.html();
-  let timeStrings = html.match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/g);
-  console.log(timeStrings);
+  let timeStrings = html.match(/[0-9]{2}:[0-9]{2}/g);
 
   html = html.replace('upcoming', 'past');
 
@@ -61,19 +58,20 @@ function handleDelayWindow($) {
   while (timeStrings[i] < maybeDelayedTimeString) {
     ++i;
   }
-  console.log(timeStrings[i]);
 
-  let insertBeforeMaybeDelayed = '</tbody><tbody id="maybe-delayed">';
-  html = insertBeforeTr(insertBeforeMaybeDelayed, timeStrings[i], html);
+  if (timeStrings[i] !== undefined) {
+    let insertBeforeMaybeDelayed = '</tbody><tbody id="maybe-delayed">';
+    html = insertBeforeTr(insertBeforeMaybeDelayed, timeStrings[i], html);
 
-  while (timeStrings[i] < rightNowTimeString) {
-    ++i;
+    while (timeStrings[i] < rightNowTimeString) {
+      ++i;
+    }
+
+    if (timeStrings[i] !== undefined) {
+      let insertBeforeNextOne = '</tbody><tbody id="upcoming">';
+      html = insertBeforeTr(insertBeforeNextOne, timeStrings[i], html);
+    }
   }
-
-  console.log(timeStrings[i]);
-
-  let insertBeforeNextOne = '</tbody><tbody id="upcoming">';
-  html = insertBeforeTr(insertBeforeNextOne, timeStrings[i], html);
 
   table.html(html);
 
@@ -128,8 +126,6 @@ function handleDestinationToggles($) {
       }
     });
 
-    console.log(invisibleDestinations);
-
     if (invisibleDestinations.length > 0) {
       let selector = invisibleDestinations.map(dest => `tr[data-destination=${dest}]`).join(', ');
       styleElement.text(`${selector} { display: none }`);
@@ -161,8 +157,6 @@ function handleDestinationToggles($) {
   });
 
   showHideDepartures();
-
-  console.log(destinations);
 }
 
 $(function() {
