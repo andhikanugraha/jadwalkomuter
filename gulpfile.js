@@ -59,7 +59,7 @@ gulp.task('build:js', ['timetable', 'index'].map(fn => {
       .bundle()
       .pipe(source(`${fn}.js`))
       .pipe(buffer())
-      // .pipe(uglify())
+      .pipe(uglify())
       .pipe(gulp.dest('dist/js/')));
   return `js:${fn}`;
 }));
