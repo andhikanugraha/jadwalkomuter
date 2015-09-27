@@ -1,1 +1,26 @@
-@import "bootstrap/bootstrap"
+$enable-flex: true;
+$font-family-base: Segoe UI;
+
+@import "bootstrap/bootstrap";
+
+.timetable-title {
+	margin: ($spacer * 2) 0;
+	h1 {
+		@extend .display-4;
+	}
+}
+#past {
+	color: $brand-warning;
+	display: none;
+}
+#maybe-delayed {
+	color: $gray-light;
+}
+#show-previous {
+	font-style: italic;
+	cursor: pointer;
+	color: $brand-primary;
+}
+#show-previous:hover {
+	text-decoration: underline;
+}

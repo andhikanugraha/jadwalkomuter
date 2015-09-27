@@ -18,6 +18,22 @@
   "homepage": "https://github.com/andhikanugraha/jadwalkomuter#readme",
   "dependencies": {
     "cheerio": "^0.19.0",
-    "handlebars": "^4.0.3"
+    "fs-promise": "^0.3.1",
+    "handlebars": "^4.0.3",
+    "jquery": "^2.1.4",
+    "js-yaml": "^3.4.2",
+    "lodash": "^3.10.1",
+    "mkpath": "^0.1.0",
+    "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-serve": "^1.2.0",
+    "gulp-uglify": "^1.4.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

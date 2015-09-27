@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>{{ stationName }} | jadwalkomuter</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-dark navbar-static-top bg-inverse">
+        <a class="navbar-brand" href="/">jadwalkomuter</a>
+      </nav>
+
+      <div class="timetable-title">
+        <h1>{{ stationName }}</h1>
+      </div>
+
+      <table class="table" id="timetable">
+        <thead>
+          <tr>
+            <th>Waktu</th>
+            <th>Tujuan</th>
+          </tr>
+        </thead>
+        <tr>
+          <td colspan="2" id="show-previous">Tampilkan selengkapnya</td>
+        </tr>
+        <tbody id="upcoming">
+          {{#departures}}
+          <tr data-time="{{timeString}}" class="departure">
+            <td class="time">{{timeString}}</td>
+            <td class="dest">{{destination}}</td>
+          </tr>
+          {{/departures}}
+        </tbody>
+      </table>
+    </div>
+    <script src="../js/timetable.js"></script>
+  </body>
+</html>
