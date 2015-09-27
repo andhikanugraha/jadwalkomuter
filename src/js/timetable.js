@@ -1,12 +1,14 @@
-var $ = require('jquery');
-var storage = require('./storage');
+'use strict';
+
+let $ = require('jquery');
+let storage = require('./storage');
 
 function handleDelayWindow($) {
   function makeTimeString(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var str = '';
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let str = '';
 
     if (hours < 10) {
       str += '0';
@@ -31,37 +33,37 @@ function handleDelayWindow($) {
   }
 
   function insertBeforeTr(str, timeString, html) {
-    var needle = '<tr .*data-time="' + timeString + '"';
-    var pattern = new RegExp(needle);
-    var theNeedle = html.match(pattern)[0];
+    let needle = '<tr .*data-time="' + timeString + '"';
+    let pattern = new RegExp(needle);
+    let theNeedle = html.match(pattern)[0];
     return html.replace(theNeedle, str + theNeedle);
   }
 
   // modify innerHTML of table for multiple tbodies
-  var maybeDelayed = new Date();
+  let maybeDelayed = new Date();
   maybeDelayed.setTime(Date.now() - (30 * 60 * 1000));
-  var maybeDelayedTimeString = makeTimeString(maybeDelayed);  
+  let maybeDelayedTimeString = makeTimeString(maybeDelayed);  
   console.log(maybeDelayedTimeString);
 
-  var rightNow = new Date();
-  var rightNowTimeString = makeTimeString(rightNow);
+  let rightNow = new Date();
+  let rightNowTimeString = makeTimeString(rightNow);
   console.log(rightNowTimeString);
 
-  var table = $('#timetable');
+  let table = $('#timetable');
 
-  var html = table.html();
-  var timeStrings = html.match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/g);
+  let html = table.html();
+  let timeStrings = html.match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/g);
   console.log(timeStrings);
 
   html = html.replace('upcoming', 'past');
 
-  var i = 0;
+  let i = 0;
   while (timeStrings[i] < maybeDelayedTimeString) {
     ++i;
   }
   console.log(timeStrings[i]);
 
-  var insertBeforeMaybeDelayed = '</tbody><tbody id="maybe-delayed">';
+  let insertBeforeMaybeDelayed = '</tbody><tbody id="maybe-delayed">';
   html = insertBeforeTr(insertBeforeMaybeDelayed, timeStrings[i], html);
 
   while (timeStrings[i] < rightNowTimeString) {
@@ -70,7 +72,7 @@ function handleDelayWindow($) {
 
   console.log(timeStrings[i]);
 
-  var insertBeforeNextOne = '</tbody><tbody id="upcoming">';
+  let insertBeforeNextOne = '</tbody><tbody id="upcoming">';
   html = insertBeforeTr(insertBeforeNextOne, timeStrings[i], html);
 
   table.html(html);
@@ -88,13 +90,13 @@ function handleDelayWindow($) {
 }
 
 function handleDestinationToggles($) {
-  var currentStationKey = $('body').attr('data-station-key');
+  let currentStationKey = $('body').attr('data-station-key');
   const STORAGE_PREFIX = `showdest:${currentStationKey}:`;
 
-  var expandStorageKey = STORAGE_PREFIX + '_expand';
-  var destinationSelector = $('#destination-selector');
-  var toggleHeader = $('.card-header', destinationSelector);
-  var destinationUl = $('ul', destinationSelector);
+  let expandStorageKey = STORAGE_PREFIX + '_expand';
+  let destinationSelector = $('#destination-selector');
+  let toggleHeader = $('.card-header', destinationSelector);
+  let destinationUl = $('ul', destinationSelector);
 
   storage.setDefault(expandStorageKey, true);
   storage.bind(expandStorageKey, value => {
@@ -113,13 +115,13 @@ function handleDestinationToggles($) {
     e.preventDefault();
   });
 
-  var destinations = [];
-  var toggles = $('#destination-toggles input[type=checkbox]');
+  let destinations = [];
+  let toggles = $('#destination-toggles input[type=checkbox]');
 
-  var styleElement = $('<style>');
+  let styleElement = $('<style>');
   $('head').append(styleElement);
   function showHideDepartures() {
-    var invisibleDestinations = [];
+    let invisibleDestinations = [];
     destinations.forEach(dest => {
       if (storage.get(STORAGE_PREFIX + dest) === false) {
         invisibleDestinations.push(dest);
@@ -129,7 +131,7 @@ function handleDestinationToggles($) {
     console.log(invisibleDestinations);
 
     if (invisibleDestinations.length > 0) {
-      var selector = invisibleDestinations.map(dest => `tr[data-destination=${dest}]`).join(', ');
+      let selector = invisibleDestinations.map(dest => `tr[data-destination=${dest}]`).join(', ');
       styleElement.text(`${selector} { display: none }`);
     }
     else {
@@ -138,12 +140,12 @@ function handleDestinationToggles($) {
   }
 
   toggles.each(function() {
-    var toggle = $(this);
-    var dest = this.getAttribute('data-destination');
+    let toggle = $(this);
+    let dest = this.getAttribute('data-destination');
 
     destinations.push(dest);
 
-    var storageKey = STORAGE_PREFIX + dest;
+    let storageKey = STORAGE_PREFIX + dest;
 
     toggle.prop('checked', storage.get(storageKey));
 
@@ -152,7 +154,7 @@ function handleDestinationToggles($) {
       showHideDepartures();
     });
     toggle.change(function() {
-      var isChecked = $(this).prop('checked');
+      let isChecked = $(this).prop('checked');
       storage.set(storageKey, isChecked);
     });
     storage.setDefault(storageKey, true);

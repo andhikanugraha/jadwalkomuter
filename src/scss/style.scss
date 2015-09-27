@@ -15,6 +15,16 @@ $font-family-base: "San Francisco",
 }
 .timetable-title {
 	margin: ($spacer * 2) 0;
+	h1 {
+		font-weight: $display4-weight;
+		font-size: $font-size-h2;
+	}
+}
+@include media-breakpoint-up(lg) {
+	.timetable-title h1 {
+		font-size: $display4-size;
+		font-weight: $display4-weight;
+	}
 }
 #past {
 	color: $brand-warning;
@@ -70,6 +80,9 @@ $font-family-base: "San Francisco",
 #destination-selector {
 	ul {
 		display: none;
+	}
+	.card-header {
+		cursor: pointer;
 	}
 	.card-header:before {
 		@include fa-icon();

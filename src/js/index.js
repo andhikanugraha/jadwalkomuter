@@ -1,24 +1,34 @@
-var $ = require('jquery');
-var storage = require('./storage');
+'use strict';
+
+let $ = require('jquery');
+let storage = require('./storage');
+
+let allStationsRaw = require('../../dist/index.json');
+let allStations = [];
+Object.keys(allStationsRaw).forEach(key => {
+  let station = allStationsRaw[key];
+  station.key = key;
+  allStations.push(station);
+});
 
 function rebuildStationLinks(stations) {
-  var list = $('#station-list');
-  var prevHTML = list.html();
-  var tpl = (s) => `<li class="list-group-item"><a href="${s.path}/">${s.name}</a></li>`;
-  var newHTML = stations.map(tpl).join('');
+  let list = $('#station-list');
+  let prevHTML = list.html();
+  let tpl = (s) => `<li class="list-group-item"><a href="${s.path}/">${s.name}</a></li>`;
+  let newHTML = stations.map(tpl).join('');
   if (prevHTML !== newHTML) {
     $('#station-list').html(newHTML);
   }
 }
 $(function() {
-  var filteredStations = data;
+  let filteredStations = allStations;
   function processQuery(query) {
     if (query.length === 0) {
-      filteredStations = data;
+      filteredStations = allStations;
     }
     else {
-      var pattern = new RegExp(`.*${query}.*`, 'i');
-      filteredStations = data.filter(s => (pattern.exec(s.name) || pattern.exec(s.path) || pattern.exec(s.key)));
+      let pattern = new RegExp(`.*${query}.*`, 'i');
+      filteredStations = allStations.filter(s => (pattern.exec(s.name) || pattern.exec(s.path) || pattern.exec(s.key)));
     }
     console.log(filteredStations);
     rebuildStationLinks(filteredStations);
